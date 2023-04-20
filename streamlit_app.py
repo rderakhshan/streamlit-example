@@ -48,18 +48,18 @@ def page_6():
 
 # Define app
 def app():
-    page = st.sidebar.radio("Go to", ("Page 1", "Page 2", "Page 3", "Page 4", "Page 5", "Page 6"))
-    if page == "Page 1":
+    st.sidebar.markdown('## Pages')
+    if st.sidebar.button('Page 1'):
         page_1()
-    elif page == "Page 2":
+    if st.sidebar.button('Page 2'):
         page_2()
-    elif page == "Page 3":
+    if st.sidebar.button('Page 3'):
         page_3()
-    elif page == "Page 4":
+    if st.sidebar.button('Page 4'):
         page_4()
-    elif page == "Page 5":
+    if st.sidebar.button('Page 5'):
         page_5()
-    elif page == "Page 6":
+    if st.sidebar.button('Page 6'):
         page_6()
 
 # Run app
