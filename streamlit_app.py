@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 
 # Define function to load data from selected files
 @st.cache(allow_output_mutation=True)
@@ -10,11 +9,6 @@ def load_data(files):
         df = pd.read_excel(file, engine='openpyxl')
         data.append(df)
     return data
-
-# Define function to create visualizations
-def create_viz(data):
-    fig = px.scatter(data, x='x', y='y', color='category')
-    return fig
 
 # Define pages
 def page_1():
@@ -28,40 +22,30 @@ def page_1():
         st.sidebar.markdown('## Navigation')
         page = st.sidebar.radio("Go to", ("Page 2", "Page 3", "Page 4", "Page 5", "Page 6"))
         if page == "Page 2":
-            page_2(data)
+            page_2()
         elif page == "Page 3":
-            page_3(data)
+            page_3()
         elif page == "Page 4":
-            page_4(data)
+            page_4()
         elif page == "Page 5":
-            page_5(data)
+            page_5()
         elif page == "Page 6":
-            page_6(data)
+            page_6()
 
-def page_2(data):
+def page_2():
     st.title('Page 2')
-    fig = create_viz(data[0])
-    st.plotly_chart(fig)
 
-def page_3(data):
+def page_3():
     st.title('Page 3')
-    fig = create_viz(data[1])
-    st.plotly_chart(fig)
 
-def page_4(data):
+def page_4():
     st.title('Page 4')
-    fig = create_viz(data[2])
-    st.plotly_chart(fig)
 
-def page_5(data):
+def page_5():
     st.title('Page 5')
-    fig = create_viz(data[3])
-    st.plotly_chart(fig)
 
-def page_6(data):
+def page_6():
     st.title('Page 6')
-    fig = create_viz(data[4])
-    st.plotly_chart(fig)
 
 # Define app
 def app():
