@@ -12,43 +12,40 @@ def load_data(files):
 
 # Define pages
 def page_1():
-    st.title('Select Files')
-    files = st.sidebar.file_uploader('Select up to 6 Excel files', type='xlsx', accept_multiple_files=True)
+    st.write("<h1 style='text-align: center'>Select Files</h1>", unsafe_allow_html=True)
+    files = st.file_uploader('Select up to 6 Excel files', type='xlsx', accept_multiple_files=True)
     if files:
         data = load_data(files)
         st.success('Data loaded successfully!')
-        st.sidebar.success('Files selected successfully!')
-        st.sidebar.markdown('---')
-        st.sidebar.markdown('## Navigation')
-        if st.sidebar.button('Page 2'):
+        st.write("<h2 style='text-align: center'>Navigation</h2>", unsafe_allow_html=True)
+        if st.button('Page 2', key='2'):
             page_2()
-        if st.sidebar.button('Page 3'):
+        if st.button('Page 3', key='3'):
             page_3()
-        if st.sidebar.button('Page 4'):
+        if st.button('Page 4', key='4'):
             page_4()
-        if st.sidebar.button('Page 5'):
+        if st.button('Page 5', key='5'):
             page_5()
-        if st.sidebar.button('Page 6'):
+        if st.button('Page 6', key='6'):
             page_6()
 
 def page_2():
-    st.title('Page 2')
+    st.write("<h1 style='text-align: center'>Page 2</h1>", unsafe_allow_html=True)
 
 def page_3():
-    st.title('Page 3')
+    st.write("<h1 style='text-align: center'>Page 3</h1>", unsafe_allow_html=True)
 
 def page_4():
-    st.title('Page 4')
+    st.write("<h1 style='text-align: center'>Page 4</h1>", unsafe_allow_html=True)
 
 def page_5():
-    st.title('Page 5')
+    st.write("<h1 style='text-align: center'>Page 5</h1>", unsafe_allow_html=True)
 
 def page_6():
-    st.title('Page 6')
+    st.write("<h1 style='text-align: center'>Page 6</h1>", unsafe_allow_html=True)
 
 # Define app
 def app():
-    st.sidebar.markdown('## Pages')
     if st.sidebar.button('Page 1'):
         page_1()
     if st.sidebar.button('Page 2'):
