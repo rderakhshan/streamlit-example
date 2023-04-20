@@ -1,38 +1,77 @@
-from collections import namedtuple
-import altair as alt
-import math
-import pandas as pd
 import streamlit as st
+import pandas as pd
+import plotly.express as px
 
-"""
-# Welcome to Streamlit!
+# Define function to load Excel files and perform data analysis
+def load_data(filename):
+    df = pd.read_excel(filename)
+    # Perform data analysis here
+    return df
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:
+# Define function to create visualization on page 2
+def page_2(df):
+    st.header("Page 2")
+    # Create visualization using Plotly Express
+    fig = px.scatter(df, x="column1", y="column2")
+    st.plotly_chart(fig)
 
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
+# Define function to create visualization on page 3
+def page_3(df):
+    st.header("Page 3")
+    # Create visualization using Plotly Express
+    fig = px.line(df, x="column1", y="column2")
+    st.plotly_chart(fig)
 
-In the meantime, below is an example of what you can do with just a few lines of code:
-"""
+# Define function to create visualization on page 4
+def page_4(df):
+    st.header("Page 4")
+    # Create visualization using Plotly Express
+    fig = px.bar(df, x="column1", y="column2")
+    st.plotly_chart(fig)
 
+# Define function to create visualization on page 5
+def page_5(df):
+    st.header("Page 5")
+    # Create visualization using Plotly Express
+    fig = px.pie(df, values="column1", names="column2")
+    st.plotly_chart(fig)
 
-with st.echo(code_location='below'):
-    total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
-    num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
+# Define function to create visualization on page 6
+def page_6(df):
+    st.header("Page 6")
+    # Create visualization using Plotly Express
+    fig = px.histogram(df, x="column1", nbins=10)
+    st.plotly_chart(fig)
 
-    Point = namedtuple('Point', 'x y')
-    data = []
+# Define function to create visualization on page 7
+def page_7(df):
+    st.header("Page 7")
+    # Create visualization using Plotly Express
+    fig = px.box(df, x="column1", y="column2")
+    st.plotly_chart(fig)
 
-    points_per_turn = total_points / num_turns
+# Define main function
+def main():
+    # Add file selector and uploader to sidebar
+    st.sidebar.title("Select a file to load")
+    file_option = st.sidebar.selectbox("Choose a file", ["data1.xlsx", "data2.xlsx", "data3.xlsx", "data4.xlsx", "data5.xlsx", "data6.xlsx", "data7.xlsx"])
+    uploaded_file = st.sidebar.file_uploader("Or upload your own file", type=["xlsx"])
 
-    for curr_point_num in range(total_points):
-        curr_turn, i = divmod(curr_point_num, points_per_turn)
-        angle = (curr_turn + 1) * 2 * math.pi * i / points_per_turn
-        radius = curr_point_num / total_points
-        x = radius * math.cos(angle)
-        y = radius * math.sin(angle)
-        data.append(Point(x, y))
+    # Load data on first page
+    st.sidebar.title("Pages")
+    st.sidebar.radio("Go to", ("Page 1", "Page 2", "Page 3", "Page 4", "Page 5", "Page 6", "Page 7"))
+    
+    if file_option:
+        df = load_data(file_option)
+    elif uploaded_file:
+        df = load_data(uploaded_file)
+    else:
+        st.warning("Please select or upload a file.")
+        return
 
-    st.altair_chart(alt.Chart(pd.DataFrame(data), height=500, width=500)
-        .mark_circle(color='#0068c9', opacity=0.5)
-        .encode(x='x:Q', y='y:Q'))
+    # Create pages using radio buttons
+    if st.sidebar.radio("Go to", ("Page 1", "Page 2", "Page 3", "Page 4", "Page 5", "Page 6", "Page 7")) == "Page 1":
+        st.title("Page 1")
+        # Display loaded data
+        st.write(df)
+    elif st.sidebar.radio("Go to", ("Page 1", "Page 2", "Page 3", "Page 4", "Page 5", "Page 6", "Page 7")) == "Page 2":
